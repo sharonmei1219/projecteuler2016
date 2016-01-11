@@ -1,5 +1,10 @@
-//---- closure version ----
+//--- functional ---
+def lagestFracor(start: Long, target: Long): Long = {
+	val factor:Long = Stream.from(start.toInt).find(target % _ == 0).get
+	if (factor == target) factor else lagestFracor(factor + 1, target/factor)
+}
 
+println(lagestFracor(2L, 600851475143L))
 
 //---- simplified ---
 def simpleProcedure(target: Long): Long = {
@@ -36,7 +41,7 @@ def firstFactor(start: Long, target: Long): Long= {
 	target
 }
 
-def largestFactor(target: Long): Long={
+def procLargestFactor(target: Long): Long={
 	var newTarget: Long = target
 	var start: Long = 2
 	var factor: Long = firstFactor(start, newTarget)
@@ -48,5 +53,5 @@ def largestFactor(target: Long): Long={
 	factor
 }
 
-println(largestFactor(600851475143L))
+println(procLargestFactor(600851475143L))
 
