@@ -1,10 +1,11 @@
 //--- functional ---
-def lagestFracor(start: Long, target: Long): Long = {
-	val factor:Long = Stream.from(start.toInt).find(target % _ == 0).get
-	if (factor == target) factor else lagestFracor(factor + 1, target/factor)
+@annotation.tailrec
+def largestPrimeFracor(start: Int, end: Long): Int = {
+	val factor = Stream.from(start).find(end % _ == 0).get
+	if (factor == end) factor else largestPrimeFracor(factor + 1, end/factor)
 }
 
-println(lagestFracor(2L, 600851475143L))
+println(largestPrimeFracor(2, 600851475143L))
 
 //---- simplified ---
 def simpleProcedure(target: Long): Long = {
