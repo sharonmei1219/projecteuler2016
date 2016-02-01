@@ -21,10 +21,9 @@ val input = """73167176531330624919225119674426574742355349194934
 
 // product1 = a1 * a2 * ... * a13
 // product2 = product1 * a14 / a1
-// List.fill(13)(1):::xs zip xs == List((1, a1), (1, a2), ..., (1, a13), (a1, a14), (a2, a15), ...)
-def lp(cn:Int)(xs:List[Long]):Long =
-((List.fill(cn)(1.toLong):::xs zip xs).
-	foldLeft(List(1.toLong))((r, n) => ((r.head*n._2)/n._1)::r)).max
+// (List.fill(13)(1):::xs zip xs) looks like  List((1, a1), (1, a2), ..., (1, a13), (a1, a14), (a2, a15), ...)
+def lp(cn:Int)(xs:List[Int]):Long =
+(List.fill(cn)(1):::xs zip xs).	foldLeft(List(1))((r, n) => ((r.head*n._2)/n._1)::r).max
 
-println(input.split("0").map(_.map(c => (c -'0').toLong).toList).
-	map(lp(13)(_)).max)
+println(input.split("0").map(_.map(_-'0').toList).map(lp(13)(_)).max)
+
