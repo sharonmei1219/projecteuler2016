@@ -41,11 +41,14 @@ def prdof(count:Int)(g:Grid, c:Int, f:Grid => Grid):Grid ={
 	return prd(g, prdof(count)(f(g), c+1, f))
 }
 
+def maxInDir(f:Grid => Grid) = 
+	prdof(4)(grid, 1, f).map(_.max).max
+
 val result = List(
-prdof(4)(grid, 1, md).map(_.max).max,
-prdof(4)(grid, 1, mr).map(_.max).max,
-prdof(4)(grid, 1, md _ andThen mr _).map(_.max).max,
-prdof(4)(grid, 1, mu _ andThen mr _).map(_.max).max).max
+				maxInDir(md),
+				maxInDir(mr),
+				maxInDir(md _ andThen mr _),
+				maxInDir(mu _ andThen mr _)).max
 
 println(result)
 
